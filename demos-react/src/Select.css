@@ -1,0 +1,37 @@
+.select { }
+
+.selected-item {
+
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.selected-item:hover {
+  background-color: #f0f0f0;
+}
+
+.menu {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  margin-top: 4px;
+}
+
+.item {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.item:hover {
+  background-color: #f0f0f0;
+}
+
+.item.selected {
+  background-color: #e0e0e0;
+  font-weight: bold;
+}
