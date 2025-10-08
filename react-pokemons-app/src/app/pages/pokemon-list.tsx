@@ -5,9 +5,11 @@ import { getPokemons } from '../services/pokemon-service';
 import { Link, Navigate } from 'react-router-dom';
 import PokemonSearch from '../components/pokemon-search';
 import { isAuthenticated } from '../services/authentication-service';
+import { useCompare } from '../helpers/compare-context';
 
 function PokemonList() {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const { pokemonIdsToCompare } = useCompare();
 
   useEffect(() => {
     getPokemons().then((pokemons) => setPokemons(pokemons));
@@ -35,13 +37,15 @@ function PokemonList() {
       >
         <i className="material-icons">add</i>
       </Link>
-      <Link
-        className="btn-floating btn-large waves-effect waves-light teal z-depth-3"
-        style={{ position: 'fixed', bottom: '25px', right: '100px' }}
-        to="/pokemon/compare"
-      >
-        <i className="material-icons">compare</i>
-      </Link>
+      {pokemonIdsToCompare.length === 2 && (
+        <Link
+          className="btn-floating btn-large waves-effect waves-light teal z-depth-3"
+          style={{ position: 'fixed', bottom: '25px', right: '100px' }}
+          to="/pokemon/compare"
+        >
+          <i className="material-icons">compare</i>
+        </Link>
+      )}
     </div>
   );
 }

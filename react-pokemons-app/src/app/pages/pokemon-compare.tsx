@@ -3,16 +3,20 @@ import PokemonCardDetail from "../components/pokemon-card-detail";
 import { getPokemon } from "../services/pokemon-service";
 import { Pokemon } from "../models/pokemon";
 import { Link } from "react-router-dom";
+import { useCompare } from "../helpers/compare-context";
 
 function PokemonCompare() {
+  const { pokemonIdsToCompare } = useCompare();
   const [pokemon1, setPokemon1] = useState<Pokemon | undefined>();
   const [pokemon2, setPokemon2] = useState<Pokemon | undefined>();
 
   useEffect(() => {
-    getPokemon(1).then((pokemon) => setPokemon1(pokemon));
-    getPokemon(2).then((pokemon) => setPokemon2(pokemon));
-  }, []);
-
+    if (pokemonIdsToCompare.length === 2) {
+      getPokemon(pokemonIdsToCompare[0]).then((pokemon) => setPokemon1(pokemon));
+      getPokemon(pokemonIdsToCompare[1]).then((pokemon) => setPokemon2(pokemon));
+    }
+  }, [pokemonIdsToCompare]);
+  
   if (!pokemon1 || !pokemon2) {
     return <div>Loading...</div>;
   }
