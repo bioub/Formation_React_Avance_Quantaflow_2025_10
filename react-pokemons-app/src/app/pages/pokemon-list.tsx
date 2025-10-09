@@ -7,17 +7,44 @@ import PokemonSearch from '../components/pokemon-search';
 import { isAuthenticated } from '../services/authentication-service';
 import { useCompare } from '../helpers/compare-context';
 import List from '../components/list';
+import Loader from '../components/loader';
 
-function PokemonList() {
+function usePokemons() {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
-  const { pokemonIdsToCompare } = useCompare();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    getPokemons().then((pokemons) => setPokemons(pokemons));
+    setLoading(true);
+    getPokemons()
+      .then((pokemons) => {
+        setPokemons(pokemons);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(error.message);
+        setLoading(false);
+      });
   }, []);
 
+  return {pokemons, loading, error};
+}
+
+function PokemonList() {
+  const { pokemons, loading, error } = usePokemons();
+  const { pokemonIdsToCompare } = useCompare();
+  
   if (!isAuthenticated) {
     return <Navigate to={{ pathname: '/login' }} />;
+  }
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (error) {
+    return null;
+    // return <ErrorMessage message={error} />;
   }
 
   return (

@@ -6,13 +6,7 @@ type Props<T> = {
 };
 
 function List<T>({ items, renderItem }: Props<T>): ReactNode {
-  return (
-    <ul>
-      {items.map((item, index) => (
-        <li key={index}>{renderItem(item, index)}</li>
-      ))}
-    </ul>
-  );
+  return items.map((item, index) => renderItem(item, index));
 }
 
 export default List;
