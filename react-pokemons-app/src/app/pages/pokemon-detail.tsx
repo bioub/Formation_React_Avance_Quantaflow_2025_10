@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { Pokemon } from '../models/pokemon';
 import Loader from '../components/loader';
-import { formatDate, formatType } from '../helpers';
 import { isAuthenticated } from '../services/authentication-service';
 import { getPokemon } from '../services/pokemon-service';
 import PokemonCardDetail from '../components/pokemon-card-detail';

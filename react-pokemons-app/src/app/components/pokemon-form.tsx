@@ -7,6 +7,7 @@ import {
   deletePokemon,
   updatePokemon,
 } from '../services/pokemon-service';
+import List from './list';
 
 type Props = {
   pokemon: Pokemon;
@@ -323,7 +324,7 @@ function PokemonForm({ pokemon, isEditForm }: Props) {
                 {/* Pokemon types */}
                 <div className="form-group">
                   <label>Types</label>
-                  {types.map((type) => (
+                  <List items={types} renderItem={(type) => (
                     <div key={type} style={{ marginBottom: '10px' }}>
                       <label>
                         <input
@@ -341,7 +342,7 @@ function PokemonForm({ pokemon, isEditForm }: Props) {
                         </span>
                       </label>
                     </div>
-                  ))}
+                  )} />
                 </div>
               </div>
               <div className="card-action center">

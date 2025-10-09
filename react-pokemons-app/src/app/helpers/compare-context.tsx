@@ -11,7 +11,7 @@ export function useCompare() {
 
 export const CompareContext = createContext<CompareContextType>({
   pokemonIdsToCompare: [],
-  togglePokemonId: (id: number) => {
+  togglePokemonId: (_id: number) => {
     throw new Error("CompareProvider is missing");
   },
 });

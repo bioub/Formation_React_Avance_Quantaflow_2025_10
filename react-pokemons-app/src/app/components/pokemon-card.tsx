@@ -2,8 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { Pokemon } from '../models/pokemon';
 import './pokemon-card.css';
 import { formatDate, formatType } from '../helpers';
-import { useContext } from 'react';
-import { CompareContext, useCompare } from '../helpers/compare-context';
+import { useCompare } from '../helpers/compare-context';
 
 type Props = {
   pokemon: Pokemon;
