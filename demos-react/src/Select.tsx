@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import './Select.css';
-import { forwardRef, useEffect, useImperativeHandle, useRef, useState, type ReactNode } from "react";
+import { forwardRef, memo, useEffect, useImperativeHandle, useRef, useState, type ReactNode } from "react";
 
 export interface SelectApi {
   open: () => void;
@@ -13,7 +13,9 @@ export interface SelectProps {
   onChange?: (value: string) => void
 }
 
-const Select = forwardRef<SelectApi, SelectProps>(function Select({ items, value, onChange }: SelectProps, ref): ReactNode {
+const Select = memo(forwardRef<SelectApi, SelectProps>(function Select({ items, value, onChange }: SelectProps, ref): ReactNode {
+
+  console.log('Rendering Select');
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
 
@@ -59,6 +61,8 @@ const Select = forwardRef<SelectApi, SelectProps>(function Select({ items, value
       )}
     </div>
   )
+}), (prevProps, nextProps) => {
+  return prevProps.value === nextProps.value && prevProps.items === nextProps.items;
 });
 
 export default Select;

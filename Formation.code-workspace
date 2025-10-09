@@ -5,6 +5,12 @@
 		},
 		{
 			"path": "demos-react"
+		},
+		{
+			"path": "exercices-optimisation"
+		},
+		{
+			"path": "demo-storybook"
 		}
 	],
 	"settings": {}
