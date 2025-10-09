@@ -1,6 +1,7 @@
 import './App.css'
 import { useRef, useState } from 'react'
 import Select, { type SelectApi } from './Select'
+import TodoList from './TodoList';
 
 function App() {
   const [value, setValue] = useState('Item 2')
@@ -16,6 +17,7 @@ function App() {
       <Select items={['Item 1', 'Item 2', 'Item 3']} value={value} onChange={handleChangeSelect1} />
       <Select items={['Item 1', 'Item 2', 'Item 3']} value={value} onChange={setValue} ref={select2Ref} />
       <p>Selected value: {value}</p>
+      <TodoList />
     </>
   )
 }
