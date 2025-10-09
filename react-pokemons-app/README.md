@@ -88,3 +88,5 @@ Créer un hook usePokemons() qui retounera un objet avec 3 clés :
 - data (Pokemon[])
 - loading (true/false)
 - error (string/null)
+
+Ce hook doit remplacer useState et useEffect dans `src/app/pages/pokemon-list.tsx`
