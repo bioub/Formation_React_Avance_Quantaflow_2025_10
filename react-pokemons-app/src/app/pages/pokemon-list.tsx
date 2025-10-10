@@ -83,8 +83,8 @@ function PokemonList() {
   }
 
   function handleExportExcel(pokemons: Pokemon[]) {
-    import('../helpers/export-to-excel').then((module) => {
-      module.exportToExcel(pokemons)
+    import('../helpers/export-to-excel').then(({ exportToExcel }) => {
+      exportToExcel(pokemons)
     })
   }
 

@@ -19,12 +19,12 @@ function getWaterPokemons(pokemons: Pokemon[]) {
 const memoizedGetWaterPokemons = memoize(getWaterPokemons);
 
 console.time('getWaterPokemons');
-console.log(memoizedGetWaterPokemons(fakePokemons).length); // ~ 250
+console.log(memoizedGetWaterPokemons(fakePokemons).length); // 2 500 000
 console.timeEnd('getWaterPokemons');
 
 
 console.time('getWaterPokemons');
-console.log(memoizedGetWaterPokemons(fakePokemons).length); // ~ 250
+console.log(memoizedGetWaterPokemons(fakePokemons).length); // 2 500 000
 console.timeEnd('getWaterPokemons');
 
 // Mutate the array

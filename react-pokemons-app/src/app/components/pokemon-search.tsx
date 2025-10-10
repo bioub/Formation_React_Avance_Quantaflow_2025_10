@@ -55,8 +55,8 @@ function PokemonSearchCard({ pokemon, onDelete }: { pokemon: Pokemon; onDelete: 
   console.log('PokemonSearchCard render');
 
   // simulate 100ms delay
-  const start = Date.now();
-  while (Date.now() - start < 100) { }
+  // const start = Date.now();
+  // while (Date.now() - start < 100) { }
 
 
   return <><Link

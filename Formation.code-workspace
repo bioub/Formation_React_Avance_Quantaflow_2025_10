@@ -11,6 +11,9 @@
 		},
 		{
 			"path": "demo-storybook"
+		},
+		{
+			"path": "demos-react-compiler"
 		}
 	],
 	"settings": {}
