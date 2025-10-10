@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { AppState } from './types';
-import { counterReducer, pokemonsReducer } from './slices';
+import { addPokemon, counterReducer, pokemonsReducer } from './slices';
 import {
   decrement,
   fetchPokemons,
@@ -71,3 +71,13 @@ store.dispatch(
   ]),
 );
 store.dispatch(setFilter('Sala'));
+
+
+store.dispatch(addPokemon({
+  name: 'Pikachu',
+  types: ['Electrik'],
+  hp: 35,
+  cp: 55,
+  picture:
+    'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/025.png',
+}));

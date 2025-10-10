@@ -1,6 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AppState } from "./types";
-import { Pokemon } from "../01-redux-seul";
+import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AppState, Pokemon } from './types';
 
 const initialState: AppState = {
   counter: {
@@ -10,11 +9,11 @@ const initialState: AppState = {
     list: [],
     loading: false,
     filter: '',
-  }
+  },
 };
 
 const counterSlice = createSlice({
-  name: "counter",
+  name: 'counter',
   initialState: initialState.counter,
   reducers: {
     increment(state) {
@@ -26,14 +25,26 @@ const counterSlice = createSlice({
     incrementByAmount(state, action: PayloadAction<number>) {
       state.value += action.payload;
     },
-  }
+  },
 });
 
 export const { increment, decrement, incrementByAmount } = counterSlice.actions;
 export const counterReducer = counterSlice.reducer;
 
+export const addPokemon = createAction(
+  'pokemons/addPokemon',
+  (pokemon: Omit<Pokemon, 'id' | 'created'>) => {
+    return {
+      payload: {
+        ...pokemon,
+        created: new Date(),
+      },
+    };
+  },
+);
+
 const pokemonsSlice = createSlice({
-  name: "pokemons",
+  name: 'pokemons',
   initialState: initialState.pokemons,
   reducers: {
     fetchPokemons(state) {
@@ -49,8 +60,22 @@ const pokemonsSlice = createSlice({
     setFilter(state, action: PayloadAction<string>) {
       state.filter = action.payload;
     },
-  }
+  },
+  extraReducers: (builder) => {
+    builder.addCase(addPokemon, (state, action) => {
+      const newPokemon: Pokemon = {
+        id: (state.list.at(-1)?.id! ?? 0) + 1,
+        ...action.payload,
+      };
+      state.list.push(newPokemon);
+    });
+  },
 });
 
-export const { fetchPokemons, fetchPokemonsSuccess, fetchPokemonsError, setFilter } = pokemonsSlice.actions;
+export const {
+  fetchPokemons,
+  fetchPokemonsSuccess,
+  fetchPokemonsError,
+  setFilter,
+} = pokemonsSlice.actions;
 export const pokemonsReducer = pokemonsSlice.reducer;
