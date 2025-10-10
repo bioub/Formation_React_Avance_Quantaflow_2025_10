@@ -66,7 +66,7 @@ function PokemonSearchCard({ pokemon, onDelete }: { pokemon: Pokemon; onDelete: 
   >
     {pokemon.name}
   </Link>
-  <button onClick={() => onDelete(pokemon.id ?? 0)}>-</button>
+  <button data-testid={`delete-button-${pokemon.id}`} onClick={() => onDelete(pokemon.id ?? 0)}>-</button>
   </>
 }
 
