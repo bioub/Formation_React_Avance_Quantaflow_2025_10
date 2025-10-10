@@ -1,11 +1,16 @@
 import { useState, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { Pokemon } from '../models/pokemon';
+import { filterSelector } from '../../store/selectors';
+import { setFilter } from '../../store/slices';
+import { useAppDispatch, useAppSelector } from '../../store/store';
 
 function PokemonSearch({ pokemons = [], onDelete }: { pokemons: Pokemon[]; onDelete: (id: number) => void }) {
   console.log('PokemonSearch render');
   const [value, setValue] = useState('');
-  const [searchTerm, setSearchTerm] = useState('');
+  
+  const searchTerm = useAppSelector(filterSelector);
+  const dispatch = useAppDispatch();
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void {
     const term = event.target.value;
@@ -25,7 +30,7 @@ function PokemonSearch({ pokemons = [], onDelete }: { pokemons: Pokemon[]; onDel
                 value={value}
                 onChange={(e) => handleInputChange(e)}
               />
-              <button onClick={() => setSearchTerm(value)}>Search</button>
+              <button onClick={() => dispatch(setFilter(value))}>Search</button>
             </div>
             <div className="collection">
               <MemoizedPokemonSearchList pokemons={pokemons} searchTerm={searchTerm} onDelete={onDelete} />

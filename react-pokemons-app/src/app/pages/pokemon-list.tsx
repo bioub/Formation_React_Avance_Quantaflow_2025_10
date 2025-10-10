@@ -8,6 +8,10 @@ import { isAuthenticated } from '../services/authentication-service';
 import { useCompare } from '../helpers/compare-context';
 import List from '../components/list';
 import Loader from '../components/loader';
+import { useDispatch, useSelector } from 'react-redux';
+import { pokemonsErrorSelector, pokemonsLoadingSelector, pokemonsSelector } from '../../store/selectors';
+import { fetchPokemons,  } from '../../store/slices';
+import { AppDispatch, useAppDispatch, useAppSelector } from '../../store/store';
 // import { exportToExcel } from '../helpers/export-to-excel';
 
 // function usePokemons() {
@@ -32,21 +36,17 @@ import Loader from '../components/loader';
 // }
 
 function PokemonList() {
-  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const pokemons = useAppSelector(pokemonsSelector);
+  const loading = useAppSelector(pokemonsLoadingSelector);
+  const error = useAppSelector(pokemonsErrorSelector);
+  const dispatch = useAppDispatch();
+
+  // const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  // const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    setLoading(true);
-    getPokemons()
-      .then((pokemons) => {
-        setPokemons(pokemons);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setError(error.message);
-        setLoading(false);
-      });
+    dispatch(fetchPokemons());
   }, []);
   // const { pokemons, loading, error } = usePokemons();
   const { pokemonIdsToCompare } = useCompare();
@@ -64,7 +64,8 @@ function PokemonList() {
   const memoHandleDelete = useCallback(function handleDelete(id: number): void {
     const index = pokemons.findIndex((pokemon) => pokemon.id === id);
     if (index !== -1) {
-      setPokemons([...pokemons.slice(0, index), ...pokemons.slice(index + 1)]);
+      // TODO create delete action
+      // setPokemons([...pokemons.slice(0, index), ...pokemons.slice(index + 1)]);
     }
   }, [pokemons]);
 

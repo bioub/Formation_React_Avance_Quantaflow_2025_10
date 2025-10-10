@@ -90,3 +90,34 @@ Créer un hook usePokemons() qui retounera un objet avec 3 clés :
 - error (string/null)
 
 Ce hook doit remplacer useState et useEffect dans `src/app/pages/pokemon-list.tsx`
+
+## Exercice 6 : Redux
+
+Nous allons migrer `CompareContext` vers Redux.
+
+On va intéragir avec la clé `selectedPokemonIds` du state `pokemons` (de type `number[]`)
+
+Le state pokemon stocké dans Redux sera donc de la forme :
+```
+{
+  list: [], // tableau de pokemons,
+  loading: false, // est-ce qu'une requete est en cours,
+  filter: '', // le contenu du champ de recherche
+  selectedPokemonIds: [2, 5], // les ids des pokemons à comparer
+}
+```
+
+Modifier le slice pour traiter l'action `togglePokemonSelection` et exporter l'action creator, le code du reducer est similaire à ce qu'on faisait dans `CompareProvider` (ajouter/supprimer du tableau)
+
+Tester avec Redux DevTools en faisant des dispatch de l'action :
+
+```
+{
+type: 'pokemons/togglePokemonSelection',
+payload: 2, // l'id du pokemon sélectionné
+}
+```
+
+Utiliser `useAppDispatch` pour créer l'action `togglePokemonSelection` lorsqu'on clique sur la checkbox dans `PokemonCard` (à la place de `togglePokemonSelection` qui venait du context)
+
+Créer et utiliser `selectedPokemonIdsSelector` pour récupérer les `selectedPokemonIds` dans `PokemonCard` et cocher la checkbox en fonction de si l'id est dans le tableau.
