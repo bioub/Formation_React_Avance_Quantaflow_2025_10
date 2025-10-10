@@ -4,9 +4,11 @@ import { getPokemon } from "../services/pokemon-service";
 import { Pokemon } from "../models/pokemon";
 import { Link } from "react-router-dom";
 import { useCompare } from "../helpers/compare-context";
+import { useAppSelector } from "../../store/store";
+import { selectedPokemonIdsSelector } from "../../store/selectors";
 
 function PokemonCompare() {
-  const { pokemonIdsToCompare } = useCompare();
+  const pokemonIdsToCompare = useAppSelector(selectedPokemonIdsSelector);
   const [pokemon1, setPokemon1] = useState<Pokemon | undefined>();
   const [pokemon2, setPokemon2] = useState<Pokemon | undefined>();
 

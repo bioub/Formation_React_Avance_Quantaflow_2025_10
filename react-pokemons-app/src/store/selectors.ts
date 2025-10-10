@@ -16,6 +16,11 @@ export function pokemonsErrorSelector(state: RootState) {
   return state.pokemons.error;
 }
 
+export function selectedPokemonIdsSelector(state: RootState) {
+  return state.pokemons.selectedPokemonIds;
+}
+
+
 export function counterValueSelector(state: RootState) {
   return state.counter.value;
 }

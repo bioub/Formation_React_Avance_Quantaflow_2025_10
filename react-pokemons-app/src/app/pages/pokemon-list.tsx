@@ -9,7 +9,7 @@ import { useCompare } from '../helpers/compare-context';
 import List from '../components/list';
 import Loader from '../components/loader';
 import { useDispatch, useSelector } from 'react-redux';
-import { pokemonsErrorSelector, pokemonsLoadingSelector, pokemonsSelector } from '../../store/selectors';
+import { pokemonsErrorSelector, pokemonsLoadingSelector, pokemonsSelector, selectedPokemonIdsSelector } from '../../store/selectors';
 import { fetchPokemons,  } from '../../store/slices';
 import { AppDispatch, useAppDispatch, useAppSelector } from '../../store/store';
 // import { exportToExcel } from '../helpers/export-to-excel';
@@ -49,7 +49,7 @@ function PokemonList() {
     dispatch(fetchPokemons());
   }, []);
   // const { pokemons, loading, error } = usePokemons();
-  const { pokemonIdsToCompare } = useCompare();
+  const pokemonsIdsToCompare = useAppSelector(selectedPokemonIdsSelector);
 
   
 
@@ -106,7 +106,7 @@ function PokemonList() {
       >
         <i className="material-icons">add</i>
       </Link>
-      {pokemonIdsToCompare.length === 2 && (
+      {pokemonsIdsToCompare.length === 2 && (
         <Link
           className="btn-floating btn-large waves-effect waves-light teal z-depth-3"
           style={{ position: 'fixed', bottom: '25px', right: '100px' }}

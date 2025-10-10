@@ -16,6 +16,7 @@ const initialState = {
     loading: false,
     error: '',
     filter: '',
+    selectedPokemonIds: [] as number[],
   },
 };
 
@@ -64,6 +65,16 @@ const pokemonsSlice = createSlice({
     setFilter(state, action: PayloadAction<string>) {
       state.filter = action.payload;
     },
+    togglePokemonSelection(state, action: PayloadAction<number>) {
+      const id = action.payload;
+      const prevIds = state.selectedPokemonIds;
+
+      if (prevIds.includes(id)) {
+        state.selectedPokemonIds = prevIds.filter((prevId) => prevId !== id);
+      } else if (prevIds.length < 2) {
+        state.selectedPokemonIds.push(id);
+      }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(addPokemon, (state, action) => {
@@ -94,6 +105,7 @@ export const {
   // fetchPokemons,
   // fetchPokemonsSuccess,
   // fetchPokemonsError,
+  togglePokemonSelection,
   setFilter,
 } = pokemonsSlice.actions;
 export const pokemonsReducer = pokemonsSlice.reducer;
